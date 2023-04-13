@@ -55,11 +55,22 @@ namespace ConsoleApp15
     }
     public class SnackBarMediator : IMediator
     {
+
         private HotDogStand hotDogStand;
+
+        public HotDogStand HotDogStand
+        {
+            get { return hotDogStand; }
+            set { hotDogStand = value; }
+        }
         private FrenchFriesStand friesStand;
 
-        public HotDogStand HotDogStand { set { hotDogStand = value; } }
-        public FrenchFriesStand FriesStand { set { friesStand = value; } }
+        public FrenchFriesStand FriesStand
+        {
+            get { return friesStand; }
+            set { friesStand = value; }
+        }
+
 
         public void SendMessage(string message, SnackBar snackBar)
         {
@@ -75,11 +86,11 @@ namespace ConsoleApp15
         {
             SnackBarMediator mediator = new SnackBarMediator();
 
-            HotDogStand hotdogKitchen = new HotDogStand(mediator);
-            FrenchFriesStand friesKitchen = new FrenchFriesStand(mediator);
+            mediator.HotDogStand = new HotDogStand(mediator);
+            mediator.FriesStand = new FrenchFriesStand(mediator);
 
-            mediator.HotDogStand = hotdogKitchen;
-            mediator.FriesStand = friesKitchen;
+            var hotdogKitchen= mediator.HotDogStand;
+            var friesKitchen= mediator.FriesStand;
 
             hotdogKitchen.Send("Can you send more cooking oil?");
             friesKitchen.Send("Sure thing, Homer's on his way");
